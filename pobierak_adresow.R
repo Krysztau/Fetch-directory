@@ -1,4 +1,5 @@
 library("httr")
+library("XML")
 url <- "https://brent.gov.uk/your-community/community-directory/"
 raw <- GET (url)
 contentMain <- content(raw, as= "text")
@@ -20,26 +21,3 @@ for (i in 2:27) {
 	linkstemp <- paste("https://brent.gov.uk", linkstemp, sep="")
 	links <- c(links, linkstemp)
 }
-
-
-## save the list of links as txt
-setwd("/media/k/Data/WestwayCT/")
-dput(links, file = "links.R")
-
-## pick up the list
-WD <- getwd()
-setwd("/media/k/Data/WestwayCT/")
-links <- dget("links.R")
-setwd(WD)
-
-
-
-
-## this is initial rubbish, ignore
-library("XML")
-url <- ("https://brent.gov.uk/your-community/community-directory/")
-
-mainPage <- readLines(con)
-close(con)
-parsedMain <- htmlParse(mainPage, asText =TRUE)
-??htmlparse
